@@ -1,18 +1,6 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import AppContainer from './src/routes';
 
-const App = () => (
-  <View style={styles.container}>
-    <Text>Netflix!</Text>
-  </View>
-);
+const App = () => <AppContainer />;
 
 export default App;
-
-const styles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    flex: 1,
-    justifyContent: 'center',
-  },
-});
