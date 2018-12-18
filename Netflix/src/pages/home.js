@@ -1,18 +1,20 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
+import Section from '../components/section';
 
 const Home = () => (
-  <View style={styles.container}>
-    <Text>Netflix!</Text>
-  </View>
+  <ScrollView style={styles.container}>
+    <Section genre="Genero 1" />
+    <Section genre="Genero 2" />
+    <Section genre="Genero 3" />
+    <Section genre="Genero 4" />
+  </ScrollView>
 );
 
 export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    alignItems: 'center',
     flex: 1,
-    justifyContent: 'center',
   },
 });
