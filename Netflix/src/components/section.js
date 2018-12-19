@@ -1,41 +1,42 @@
 import React from 'react';
-
 import {
-  Dimensions, FlatList, StyleSheet, Text, View,
+  FlatList, StyleSheet, Text, View,
 } from 'react-native';
+import Movie from './movie';
 
 export default class Section extends React.Component {
   state = {
     movies: [
       {
-        name: 'Filme 1',
+        backdrop: 'https://image.tmdb.org/t/p/w780//wtZj5nn6hVwgakPdg6y6gm3eFXU.jpg',
         id: '1',
+        name: 'Bumblebee',
       },
       {
-        name: 'Filme 2',
+        backdrop: 'https://image.tmdb.org/t/p/w780//5A2bMlLfJrAfX9bqAibOL2gCruF.jpg',
         id: '2',
+        name: 'Aquaman',
       },
       {
-        name: 'Filme 3',
+        backdrop: 'https://image.tmdb.org/t/p/w780//wDN3FIcQQ1HI7mz1OOKYHSQtaiE.jpg',
         id: '3',
+        name: 'Animais Fantásticos: Os Crimes de Grindelwald',
       },
       {
-        name: 'Filme 4',
         id: '4',
+        name: 'Filme 4',
       },
     ],
   };
 
-  renderItem = ({ item }) => (
-    <View style={styles.movie}>
-      <Text>{item.name}</Text>
-    </View>
-  );
+  renderItem = ({ item }) => <Movie item={item} />;
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>{this.props.genre}</Text>
+        <View style={styles.genre}>
+          <Text style={styles.genreTxt}>{this.props.genre}</Text>
+        </View>
         <FlatList
           data={this.state.movies}
           decelerationRate={0.8}
@@ -43,7 +44,7 @@ export default class Section extends React.Component {
           keyExtractor={item => item.id}
           pagingEnabled
           renderItem={this.renderItem}
-        />
+          />
       </View>
     );
   }
@@ -54,11 +55,14 @@ const styles = StyleSheet.create({
     backgroundColor: '#ccc',
     borderBottomColor: '#000',
     borderBottomWidth: 0.8,
-    height: 170,
+    height: 250,
   },
-  movie: {
-    alignItems: 'center',
+  genre: {
+    height: 30,
     justifyContent: 'center',
-    width: Dimensions.get('window').width,
+    paddingLeft: 10,
+  },
+  genreTxt: {
+    fontSize: 20,
   },
 });
