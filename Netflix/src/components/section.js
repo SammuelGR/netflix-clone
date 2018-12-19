@@ -58,9 +58,9 @@ const styles = StyleSheet.create({
     height: 250,
   },
   genre: {
-    height: 30,
+    height: 35,
     justifyContent: 'center',
-    paddingLeft: 10,
+    paddingLeft: 20,
   },
   genreTxt: {
     fontSize: 20,

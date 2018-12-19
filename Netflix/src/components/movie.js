@@ -9,7 +9,9 @@ const Movie = (props) => {
     <View>
       <View style={styles.container}>
         <Image source={{ uri: item.backdrop }} resizeMode="contain" style={styles.poster} />
-        <Text>{item.name}</Text>
+        <Text style={[styles.nameTxt, item.name.length > 33 ? styles.longNameTxt : null]}>
+          {item.name}
+        </Text>
       </View>
     </View>
   );
@@ -22,7 +24,9 @@ const { width } = Dimensions.get('window');
 const styles = StyleSheet.create({
   container: {
     backgroundColor: '#ddd',
-    padding: 15,
+    paddingHorizontal: 10,
+    paddingTop: 10,
+    paddingBottom: 5,
     height: 230,
     width,
   },
@@ -30,5 +34,13 @@ const styles = StyleSheet.create({
     flex: 1,
     height: undefined,
     width: undefined,
+  },
+  longNameTxt: {
+    fontSize: 13,
+  },
+  nameTxt: {
+    fontSize: 17,
+    marginBottom: 17,
+    textAlign: 'center',
   },
 });
