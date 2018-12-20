@@ -1,19 +1,19 @@
 import React from 'react';
 import {
-  Dimensions, Image, StyleSheet, Text, View,
+  Dimensions, Image, StyleSheet, Text, TouchableHighlight, View,
 } from 'react-native';
 
 const Movie = (props) => {
   const { item } = props;
   return (
-    <View>
+    <TouchableHighlight onPress={() => {}}>
       <View style={styles.container}>
         <Image source={{ uri: item.backdrop }} resizeMode="contain" style={styles.poster} />
         <Text style={[styles.nameTxt, item.name.length > 33 ? styles.longNameTxt : null]}>
           {item.name}
         </Text>
       </View>
-    </View>
+    </TouchableHighlight>
   );
 };
 
@@ -23,7 +23,7 @@ const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ddd',
+    backgroundColor: '#6d6d6d',
     paddingHorizontal: 10,
     paddingTop: 10,
     paddingBottom: 5,
@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
     fontSize: 13,
   },
   nameTxt: {
+    color: '#ebebeb',
     fontSize: 17,
-    marginBottom: 17,
+    marginBottom: 20,
     textAlign: 'center',
   },
 });

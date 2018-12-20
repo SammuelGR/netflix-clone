@@ -20,7 +20,7 @@ export default class Section extends React.Component {
       {
         backdrop: 'https://image.tmdb.org/t/p/w780//wDN3FIcQQ1HI7mz1OOKYHSQtaiE.jpg',
         id: '3',
-        name: 'Animais Fantásticos: Os Crimes de Grindelwald',
+        name: 'Animais Fantásticos: Os Crimes de Grindelwald Grindelwald Grindelwald',
       },
       {
         id: '4',
@@ -44,7 +44,7 @@ export default class Section extends React.Component {
           keyExtractor={item => item.id}
           pagingEnabled
           renderItem={this.renderItem}
-          />
+        />
       </View>
     );
   }
@@ -52,8 +52,8 @@ export default class Section extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: '#ccc',
-    borderBottomColor: '#000',
+    backgroundColor: '#6d6d6d',
+    borderBottomColor: '#bdbdbd',
     borderBottomWidth: 0.8,
     height: 250,
   },
@@ -63,6 +63,8 @@ const styles = StyleSheet.create({
     paddingLeft: 20,
   },
   genreTxt: {
-    fontSize: 20,
+    color: '#ebebeb',
+    fontSize: 21,
+    fontWeight: 'bold',
   },
 });
