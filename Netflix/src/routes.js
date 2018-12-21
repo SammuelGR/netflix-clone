@@ -4,21 +4,12 @@ import { createStackNavigator, createAppContainer } from 'react-navigation';
 import Logo from './components/logo';
 
 import Home from './pages/home';
+import Details from './pages/details';
 
-const AppNavigator = createStackNavigator(
-  {
-    Home,
-  },
-  {
-    defaultNavigationOptions: {
-      headerTitle: <Logo />,
-      headerStyle: {
-        backgroundColor: '#1b1b1b',
-      },
-      headerTintColor: '#FFF',
-    },
-  },
-);
+const AppNavigator = createStackNavigator({
+  Home,
+  Details,
+});
 
 const AppContainer = createAppContainer(AppNavigator);
 

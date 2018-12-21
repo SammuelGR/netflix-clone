@@ -29,7 +29,7 @@ export default class Section extends React.Component {
     ],
   };
 
-  renderItem = ({ item }) => <Movie item={item} />;
+  renderItem = ({ item }) => <Movie item={item} navigation={this.props.navigation} />;
 
   render() {
     return (

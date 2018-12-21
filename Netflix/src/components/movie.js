@@ -6,7 +6,7 @@ import {
 const Movie = (props) => {
   const { item } = props;
   return (
-    <TouchableHighlight onPress={() => {}}>
+    <TouchableHighlight onPress={() => props.navigation.navigate('Details', { name: item.name })}>
       <View style={styles.container}>
         <Image source={{ uri: item.backdrop }} resizeMode="contain" style={styles.poster} />
         <Text style={[styles.nameTxt, item.name.length > 33 ? styles.longNameTxt : null]}>

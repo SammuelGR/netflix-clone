@@ -2,14 +2,27 @@ import React from 'react';
 import { StyleSheet, ScrollView } from 'react-native';
 import Section from '../components/section';
 
-const Home = () => (
-  <ScrollView style={styles.container}>
-    <Section genre="Genero 1" />
-    <Section genre="Genero 2" />
-    <Section genre="Genero 3" />
-    <Section genre="Genero 4" />
-  </ScrollView>
-);
+import Logo from '../components/logo';
+
+class Home extends React.Component {
+  static navigationOptions = {
+    headerTitle: <Logo />,
+    headerStyle: {
+      backgroundColor: '#1b1b1b',
+    },
+  };
+
+  render() {
+    return (
+      <ScrollView style={styles.container}>
+        <Section genre="Genero 1" navigation={this.props.navigation} />
+        <Section genre="Genero 2" navigation={this.props.navigation} />
+        <Section genre="Genero 3" navigation={this.props.navigation} />
+        <Section genre="Genero 4" navigation={this.props.navigation} />
+      </ScrollView>
+    );
+  }
+}
 
 export default Home;
 
