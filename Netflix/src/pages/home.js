@@ -15,7 +15,7 @@ class Home extends React.Component {
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Section genre="Genero 1" navigation={this.props.navigation} />
+        <Section genre="Populares" navigation={this.props.navigation} />
         <Section genre="Genero 2" navigation={this.props.navigation} />
         <Section genre="Genero 3" navigation={this.props.navigation} />
         <Section genre="Genero 4" navigation={this.props.navigation} />
