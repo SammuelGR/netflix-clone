@@ -21,6 +21,5 @@ const styles = StyleSheet.create({
   },
   genreTxt: {
     color: '#ebebeb',
-    paddingRight: 5,
   },
 });

@@ -5,16 +5,17 @@ import {
 
 const Movie = (props) => {
   const { item } = props;
-  
+
   return (
     <TouchableHighlight
       onPress={() => props.navigation.navigate('Details', {
+        genres: item.genres,
         name: item.name,
+        overview: item.overview,
         poster: item.poster,
         releaseDate: item.release_date,
         runtime: item.runtime,
         stars: item.vote_average,
-        genres: item.genres,
       })
       }
     >

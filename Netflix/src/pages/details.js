@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  Image, StyleSheet, Text, View,
+  Image, ScrollView, StyleSheet, Text, View,
 } from 'react-native';
 
 import Genres from '../components/genres';
@@ -26,37 +26,43 @@ export default class Details extends React.Component {
   render() {
     const { navigation } = this.props;
     const movieTitle = navigation.state.params.name;
-    const { genres, releaseDate, runtime, stars } = navigation.state.params;
+    const { genres, overview, releaseDate, runtime, stars } = navigation.state.params;
     const star = require('../../assets/star.png');
 
     return (
-      <View style={styles.container}>
-        <View style={styles.poster}>
-          <Image
-            source={{ uri: navigation.state.params.poster }}
-            resizeMode="contain"
-            style={styles.posterImg}
-          />
-        </View>
-
-        <View style={styles.details}>
-          <Text style={[styles.titleTxt, movieTitle.length > 30 ? styles.titleTxtLong : null]}>
-            {movieTitle}
-          </Text>
-
-          <View style={styles.detailsLine}>
-            <Text style={styles.detailsTxt}>{dateConversor(releaseDate)}</Text>
-            <Text style={styles.detailsTxt}>{runtime}min</Text>
-            <View style={styles.stars}>
-              <Text style={styles.detailsTxt}>{stars}</Text>
-              <Image source={star} style={styles.starImg} />
-            </View>
+      <ScrollView style={styles.container}>
+        <View style={styles.top}>
+          <View style={styles.poster}>
+            <Image
+              source={{ uri: navigation.state.params.poster }}
+              resizeMode="contain"
+              style={styles.posterImg}
+            />
           </View>
 
-          <Genres genres={genres} />
+          <View style={styles.details}>
+            <Text style={[styles.titleTxt, movieTitle.length > 30 ? styles.titleTxtLong : null]}>
+              {movieTitle}
+            </Text>
 
+            <View style={styles.detailsLine}>
+              <Text style={styles.detailsTxt}>{dateConversor(releaseDate)}</Text>
+              <Text style={styles.detailsTxt}>{runtime}min</Text>
+              <View style={styles.stars}>
+                <Text style={styles.detailsTxt}>{stars}</Text>
+                <Image source={star} style={styles.starImg} />
+              </View>
+            </View>
+
+            <Genres genres={genres} />
+
+          </View>
         </View>
-      </View>
+
+        <View style={styles.overview}>
+          <Text style={styles.overviewTxt}>{overview}</Text>
+        </View>
+      </ScrollView>
     );
   }
 }
@@ -65,7 +71,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#6d6d6d',
     flex: 1,
-    flexDirection: 'row',
   },
   details: {
     flex: 1,
@@ -82,6 +87,14 @@ const styles = StyleSheet.create({
   detailsTxt: {
     color: '#ebebeb',
     height: 20,
+  },
+  overview: {
+    padding: 15,
+  },
+  overviewTxt: {
+    color: '#ebebeb',
+    fontSize: 17,
+    padding: 10,
   },
   poster: {
     padding: 10,
@@ -107,5 +120,8 @@ const styles = StyleSheet.create({
   },
   titleTxtLong: {
     fontSize: 15,
+  },
+  top: {
+    flexDirection: 'row',
   },
 });
