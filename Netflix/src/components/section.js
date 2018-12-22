@@ -3,120 +3,43 @@ import {
   FlatList, StyleSheet, Text, View,
 } from 'react-native';
 import Movie from './movie';
+import api from '../services/api';
 
 export default class Section extends React.Component {
   state = {
-    movies: [
-      {
-        backdrop: 'https://image.tmdb.org/t/p/w780//urPYbqQnMMu5Ug09nI0KAGabbDX.jpg',
-        genres: [
-          {
-            "id": 28,
-            "name": "Ação"
-          },
-          {
-            "id": 12,
-            "name": "Aventura"
-          },
-          {
-            "id": 878,
-            "name": "Ficção científica"
-          }
-        ],
-        id: '1',
-        name: 'Bumblebee',
-        overview: '1987. Refugiado num ferro-velho numa pequena cidade praiana da Califórnia, Bumblebee, um fusca amarelo aos pedaços, machucado e sem condição de uso, é encontrado e consertado pela jovem Charlie (Hailee Steinfeld), às vésperas de completar 18 anos. Só quando Bee ganha vida ela enfim nota que seu novo amigo é bem mais do que um simples automóvel.',
-        poster: 'https://image.tmdb.org/t/p/w500//sWtotHJvTUBeX9HYm0KT4H44B0c.jpg',
-        release_date: '2018-12-07',
-        runtime: 114,
-        vote_average: 6.9,
-      },
-      {
-        backdrop: 'https://image.tmdb.org/t/p/w780//5A2bMlLfJrAfX9bqAibOL2gCruF.jpg',
-        genres: [
-          {
-            "id": 28,
-            "name": "Ação"
-          },
-          {
-            "id": 12,
-            "name": "Aventura"
-          },
-          {
-            "id": 878,
-            "name": "Ficção científica"
-          }
-        ],
-        id: '2',
-        name: 'Aquaman',
-        overview: '1987. Refugiado num ferro-velho numa pequena cidade praiana da Califórnia, Bumblebee, um fusca amarelo aos pedaços, machucado e sem condição de uso, é encontrado e consertado pela jovem Charlie (Hailee Steinfeld), às vésperas de completar 18 anos. Só quando Bee ganha vida ela enfim nota que seu novo amigo é bem mais do que um simples automóvel.',
-        poster: 'https://image.tmdb.org/t/p/w500//4CKtfsbNqAf0uDfpLfKQyig6SDu.jpg',
-        release_date: '2018-12-07',
-        runtime: 114,
-        vote_average: 6.9,
-      },
-      {
-        backdrop: 'https://image.tmdb.org/t/p/w780//wDN3FIcQQ1HI7mz1OOKYHSQtaiE.jpg',
-        genres: [
-          {
-            "id": 28,
-            "name": "Ação"
-          },
-          {
-            "id": 12,
-            "name": "Aventura"
-          },
-          {
-            "id": 878,
-            "name": "Ficção científica"
-          }
-        ],
-        id: '3',
-        name: 'Animais Fantásticos: Os Crimes de Grindelwald',
-        overview: '1987. Refugiado num ferro-velho numa pequena cidade praiana da Califórnia, Bumblebee, um fusca amarelo aos pedaços, machucado e sem condição de uso, é encontrado e consertado pela jovem Charlie (Hailee Steinfeld), às vésperas de completar 18 anos. Só quando Bee ganha vida ela enfim nota que seu novo amigo é bem mais do que um simples automóvel.',
-        poster: 'https://image.tmdb.org/t/p/w500//qflbWgNtthGGl8nURPfffGEgZu6.jpg',
-        release_date: '2018-12-07',
-        runtime: 114,
-        vote_average: 6.9,
-      },
-      {
-        genres: [
-          {
-            "id": 28,
-            "name": "Ação"
-          },
-          {
-            "id": 12,
-            "name": "Aventura"
-          },
-          {
-            "id": 878,
-            "name": "Ficção científica"
-          }
-        ],
-        id: '4',
-        name: 'Filme 4',
-        overview: '1987. Refugiado num ferro-velho numa pequena cidade praiana da Califórnia, Bumblebee, um fusca amarelo aos pedaços, machucado e sem condição de uso, é encontrado e consertado pela jovem Charlie (Hailee Steinfeld), às vésperas de completar 18 anos. Só quando Bee ganha vida ela enfim nota que seu novo amigo é bem mais do que um simples automóvel.',
-        release_date: '2018-12-07',
-        runtime: 114,
-        vote_average: 6.9,
-      },
-    ],
+    movies: [],
+  };
+
+  componentDidMount() {
+    this.loadMovies();
+  }
+
+  loadMovies = async () => {
+    const { genreId } = this.props;
+    const response = await api.get(`/discover/movie?api_key=581af4cd9fd9df5711b3b976997435fb&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${genreId}`);
+
+    const { results } = response.data;
+    const movies = results.slice(0, 7);
+
+    this.setState({ movies });
   };
 
   renderItem = ({ item }) => <Movie item={item} navigation={this.props.navigation} />;
 
   render() {
+    const { genre } = this.props;
+    const { movies } = this.state;
+
     return (
       <View style={styles.container}>
         <View style={styles.genre}>
-          <Text style={styles.genreTxt}>{this.props.genre}</Text>
+          <Text style={styles.genreTxt}>{genre}</Text>
         </View>
         <FlatList
-          data={this.state.movies}
+          data={movies}
           decelerationRate={0.8}
           horizontal
-          keyExtractor={item => item.id}
+          keyExtractor={item => item.id.toString()}
           pagingEnabled
           renderItem={this.renderItem}
         />

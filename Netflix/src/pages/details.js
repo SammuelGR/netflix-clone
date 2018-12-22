@@ -2,10 +2,9 @@ import React from 'react';
 import {
   Image, ScrollView, StyleSheet, Text, View,
 } from 'react-native';
-
 import Genres from '../components/genres';
-
 import { dateConversor } from '../util';
+import api from '../services/api';
 
 export default class Details extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -23,33 +22,56 @@ export default class Details extends React.Component {
     };
   };
 
-  render() {
+  constructor(props) {
+    super(props);
+    
+    this.state = {
+      details: [],
+    };
+  }
+
+  componentDidMount() {
+    this.loadDetails();
+  }
+
+  loadDetails = async () => {
     const { navigation } = this.props;
-    const movieTitle = navigation.state.params.name;
-    const { genres, overview, releaseDate, runtime, stars } = navigation.state.params;
+    const { id } = navigation.state.params;
+    const response = await api.get(`/movie/${id}?api_key=581af4cd9fd9df5711b3b976997435fb&language=pt-BR`);
+
+    const details = response.data;
+
+    this.setState({ details });
+    console.log(details);
+  };
+
+  render() {
+    const { details } = this.state;
+    const { genres, overview, poster_path, release_date, runtime, title, vote_average } = details;
     const star = require('../../assets/star.png');
+    const poster = `https://image.tmdb.org/t/p/w500/${poster_path}`;
 
     return (
       <ScrollView style={styles.container}>
         <View style={styles.top}>
           <View style={styles.poster}>
             <Image
-              source={{ uri: navigation.state.params.poster }}
+              source={{ uri: poster }}
               resizeMode="contain"
               style={styles.posterImg}
             />
           </View>
 
           <View style={styles.details}>
-            <Text style={[styles.titleTxt, movieTitle.length > 30 ? styles.titleTxtLong : null]}>
-              {movieTitle}
+            <Text style={[styles.titleTxt, title.length > 30 ? styles.titleTxtLong : null]}>
+              {title}
             </Text>
 
             <View style={styles.detailsLine}>
-              <Text style={styles.detailsTxt}>{dateConversor(releaseDate)}</Text>
+              <Text style={styles.detailsTxt}>{dateConversor(release_date)}</Text>
               <Text style={styles.detailsTxt}>{runtime}min</Text>
               <View style={styles.stars}>
-                <Text style={styles.detailsTxt}>{stars}</Text>
+                <Text style={styles.detailsTxt}>{vote_average}</Text>
                 <Image source={star} style={styles.starImg} />
               </View>
             </View>

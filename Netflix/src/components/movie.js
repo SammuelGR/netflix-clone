@@ -3,26 +3,29 @@ import {
   Dimensions, Image, StyleSheet, Text, TouchableHighlight, View,
 } from 'react-native';
 
+
+const chooseImage = (item) => {
+  if (item.backdrop_path) return `https://image.tmdb.org/t/p/w780/${item.backdrop_path}`;
+  if (item.poster_path) return `https://image.tmdb.org/t/p/w500/${item.poster_path}`;
+  return 'https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png';
+}
+
 const Movie = (props) => {
-  const { item } = props;
+  const { item, navigation } = props;
+  const image = chooseImage(item);
 
   return (
     <TouchableHighlight
-      onPress={() => props.navigation.navigate('Details', {
-        genres: item.genres,
-        name: item.name,
-        overview: item.overview,
-        poster: item.poster,
-        releaseDate: item.release_date,
-        runtime: item.runtime,
-        stars: item.vote_average,
+      onPress={() => navigation.navigate('Details', {
+        id: item.id,
+        name: item.title,
       })
       }
     >
       <View style={styles.container}>
-        <Image source={{ uri: item.backdrop }} resizeMode="contain" style={styles.backdrop} />
-        <Text style={[styles.nameTxt, item.name.length > 33 ? styles.nameTxtLong : null]}>
-          {item.name}
+        <Image source={{ uri: image }} resizeMode="contain" style={styles.backdrop} />
+        <Text style={[styles.nameTxt, item.title.length > 33 ? styles.nameTxtLong : null]}>
+          {item.title}
         </Text>
       </View>
     </TouchableHighlight>
