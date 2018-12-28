@@ -3,12 +3,11 @@ import {
   Dimensions, Image, StyleSheet, Text, TouchableHighlight, View,
 } from 'react-native';
 
-
 const chooseImage = (item) => {
   if (item.backdrop_path) return `https://image.tmdb.org/t/p/w780/${item.backdrop_path}`;
   if (item.poster_path) return `https://image.tmdb.org/t/p/w500/${item.poster_path}`;
-  return 'https://image.tmdb.org/t/p/w500/wwemzKWzjKYJFfCeiB57q3r4Bcm.png';
-}
+  return 'https://image.tmdb.org/t/p/w500//wwemzKWzjKYJFfCeiB57q3r4Bcm.png'; // Netflix Logo
+};
 
 const Movie = (props) => {
   const { item, navigation } = props;

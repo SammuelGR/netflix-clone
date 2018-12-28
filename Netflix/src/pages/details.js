@@ -24,9 +24,23 @@ export default class Details extends React.Component {
 
   constructor(props) {
     super(props);
-    
+
     this.state = {
-      details: [],
+      details: {
+        genres: [
+          {
+            id: 0,
+            name: '',
+          },
+        ],
+        id: 0,
+        overview: '',
+        poster_path: '/wwemzKWzjKYJFfCeiB57q3r4Bcm.png', // Netflix Logo
+        release_date: '0000-00-00',
+        runtime: 0,
+        title: '',
+        vote_average: 0,
+      },
     };
   }
 
@@ -42,7 +56,6 @@ export default class Details extends React.Component {
     const details = response.data;
 
     this.setState({ details });
-    console.log(details);
   };
 
   render() {
