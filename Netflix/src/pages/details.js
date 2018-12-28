@@ -1,5 +1,3 @@
-// versao final
-
 import React from 'react';
 import {
   Image, ScrollView, StyleSheet, Text, View,
@@ -65,8 +63,6 @@ export default class Details extends React.Component {
     const star = require('../../assets/star.png');
     const poster = `https://image.tmdb.org/t/p/w500/${poster_path}`;
 
-
-    console.log(poster_path);
     return (
       <ScrollView removeClippedSubviews style={styles.container}>
         <View style={styles.top}>
