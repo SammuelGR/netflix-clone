@@ -19,7 +19,7 @@ export default class Section extends React.Component {
     const response = await api.get(`/discover/movie?api_key=581af4cd9fd9df5711b3b976997435fb&language=pt-BR&sort_by=popularity.desc&include_adult=false&include_video=false&with_genres=${genreId}`);
 
     const { results } = response.data;
-    const movies = results.slice(0, 7);
+    const movies = results.slice(0, 5);
 
     this.setState({ movies });
   };
@@ -41,6 +41,7 @@ export default class Section extends React.Component {
           horizontal
           keyExtractor={item => item.id.toString()}
           pagingEnabled
+          removeClippedSubviews
           renderItem={this.renderItem}
         />
       </View>

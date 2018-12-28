@@ -5,6 +5,7 @@ import {
   Image, ScrollView, StyleSheet, Text, View,
 } from 'react-native';
 import Genres from '../components/genres';
+import Poster from '../components/poster';
 import { dateConversor } from '../util';
 import api from '../services/api';
 
@@ -37,7 +38,6 @@ export default class Details extends React.Component {
         ],
         id: 0,
         overview: '',
-        poster_path: '/wwemzKWzjKYJFfCeiB57q3r4Bcm.png', // Netflix Logo
         release_date: '0000-00-00',
         runtime: 0,
         title: '',
@@ -54,7 +54,6 @@ export default class Details extends React.Component {
     const { navigation } = this.props;
     const { id } = navigation.state.params;
     const response = await api.get(`/movie/${id}?api_key=581af4cd9fd9df5711b3b976997435fb&language=pt-BR`);
-
     const details = response.data;
 
     this.setState({ details });
@@ -64,16 +63,14 @@ export default class Details extends React.Component {
     const { details } = this.state;
     const { genres, overview, poster_path, release_date, runtime, title, vote_average } = details;
     const star = require('../../assets/star.png');
-    const posterUri = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+    const poster = `https://image.tmdb.org/t/p/w500/${poster_path}`;
 
+
+    console.log(poster_path);
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView removeClippedSubviews style={styles.container}>
         <View style={styles.top}>
-          <Image
-            source={{ uri: posterUri }}
-            resizeMode="contain"
-            style={styles.posterImg}
-          />
+          <Poster posterPath={poster} />
 
           <View style={styles.details}>
             <Text style={[styles.titleTxt, title.length > 30 ? styles.titleTxtLong : null]}>
@@ -131,13 +128,6 @@ const styles = StyleSheet.create({
     color: '#ebebeb',
     fontSize: 17,
     padding: 10,
-  },
-  posterImg: {
-    borderWidth: 4,
-    borderColor: '#000',
-    flex: 1,
-    height: undefined,
-    width: undefined,
   },
   starImg: {
     height: 20,
