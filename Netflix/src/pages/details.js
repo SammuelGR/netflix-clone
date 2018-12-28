@@ -1,3 +1,5 @@
+// versao final
+
 import React from 'react';
 import {
   Image, ScrollView, StyleSheet, Text, View,
@@ -62,18 +64,16 @@ export default class Details extends React.Component {
     const { details } = this.state;
     const { genres, overview, poster_path, release_date, runtime, title, vote_average } = details;
     const star = require('../../assets/star.png');
-    const poster = `https://image.tmdb.org/t/p/w500/${poster_path}`;
+    const posterUri = `https://image.tmdb.org/t/p/w500/${poster_path}`;
 
     return (
       <ScrollView style={styles.container}>
         <View style={styles.top}>
-          <View style={styles.poster}>
-            <Image
-              source={{ uri: poster }}
-              resizeMode="contain"
-              style={styles.posterImg}
-            />
-          </View>
+          <Image
+            source={{ uri: posterUri }}
+            resizeMode="contain"
+            style={styles.posterImg}
+          />
 
           <View style={styles.details}>
             <Text style={[styles.titleTxt, title.length > 30 ? styles.titleTxtLong : null]}>
@@ -111,8 +111,9 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 272,
     paddingBottom: 10,
-    paddingTop: 35,
     paddingHorizontal: 3,
+    paddingLeft: 10,
+    paddingTop: 25,
   },
   detailsLine: {
     flexDirection: 'row',
@@ -131,12 +132,9 @@ const styles = StyleSheet.create({
     fontSize: 17,
     padding: 10,
   },
-  poster: {
-    padding: 10,
-    height: 272,
-    width: 148,
-  },
   posterImg: {
+    borderWidth: 4,
+    borderColor: '#000',
     flex: 1,
     height: undefined,
     width: undefined,
@@ -158,5 +156,9 @@ const styles = StyleSheet.create({
   },
   top: {
     flexDirection: 'row',
+    paddingLeft: 10,
+    paddingTop: 10,
+    height: 272,
+    width: '100%',
   },
 });
