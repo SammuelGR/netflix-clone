@@ -118,12 +118,12 @@ const styles = StyleSheet.create({
     height: 20,
   },
   overview: {
-    padding: 15,
+    padding: 10,
   },
   overviewTxt: {
     color: '#ebebeb',
-    fontSize: 17,
-    padding: 10,
+    fontSize: 16,
+    textAlign: 'center',
   },
   starImg: {
     height: 20,
