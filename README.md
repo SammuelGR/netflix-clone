@@ -38,4 +38,4 @@
 
 ## Download
 
-Em breve.
+> Basta acessar a página de [release](https://github.com/sammuelgr/netflix-clone/releases) e procurar pelo apk.
