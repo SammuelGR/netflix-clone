@@ -40,7 +40,7 @@ Ou seguir os passos abaixo:
 
 - Instale [Expo CLI](https://expo.io/learn) com `npm install expo-cli --global` caso ainda não tenha.
 
-- Rode o comando `npm install` dentro do diretório Netflix.
+- Execute o comando `npm install` dentro do diretório Netflix.
 
 - `npm start` ou `yarn start` para iniciar o packager.
 
